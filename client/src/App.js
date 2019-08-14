@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
 import './App.css';
-
+import DayPicker, { DateUtils } from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 class App extends Component{
 
@@ -17,6 +18,7 @@ class App extends Component{
     jobDescription2: '',
     dayRate: 0,
     quantity: 0,
+    selectedDays:[]
   }
 
   handleChange = ({target:{value, name}}) => {
@@ -53,16 +55,31 @@ class App extends Component{
 
   getDateString = () => {
     const today = new Date();
-    const day = today.getDay();
-    const month = today.getMonth();
+    const day = today.getDate();
+    const month = today.getMonth()+1;
     const year = today.getFullYear();
     return `${year}-${month}-${day}`;
   }
 
-  createAndDownloadPdf = () => {
+  handleDayClick = (day, { selected }) => {
+    const { selectedDays } = this.state;
+    if (selected) {
+      const selectedIndex = selectedDays.findIndex(selectedDay =>
+        DateUtils.isSameDay(selectedDay, day)
+      );
+      selectedDays.splice(selectedIndex, 1);
+    } else {
+      selectedDays.push(day);
+    }
+    this.setState({ selectedDays });
 
-    const fileName = this.getDateString() + '.pdf';
-    
+    console.log(selectedDays);
+  }
+
+
+
+  createAndDownloadPdf = () => {
+    const fileName = this.getDateString() + '.pdf';    
     axios.post('/create-pdf', this.state)
     .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
     .then((res)=>{
@@ -139,6 +156,11 @@ class App extends Component{
                                   <label htmlFor="jobDescription2">Dates</label>
                                   <input type="text" id="jobDescription2" className="form-control" value={this.state.jobDescription2} name="jobDescription2" onChange={this.handleChange}/>
                                 </div>
+{/* 
+                                <DayPicker
+                                  selectedDays={this.state.selectedDays}
+                                  onDayClick={this.handleDayClick}
+                                /> */}
 
                                 <div className="form-group">
                                   <label htmlFor="quantity">Quantity</label>
