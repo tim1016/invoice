@@ -73,13 +73,26 @@ class App extends Component{
     }
     this.setState({ selectedDays });
 
-    console.log(selectedDays);
+    // console.log(selectedDays);
   }
 
-
+  firstDate = (dates) => {
+    for (let i=0;i<dates.length-1;i++){
+      var firstDay = dates[i];
+      if(!DateUtils.isDayBefore(firstDay, dates[i+1])){
+        firstDay=dates[i+1];
+      }
+    }
+    firstDay =  firstDay.toLocaleString("en-US");
+    firstDay =  firstDay.split(",")[0];
+    firstDay = firstDay.split("/");
+    return `${firstDay[2]}-${firstDay[0]}-${firstDay[1]}`
+    
+  };
 
   createAndDownloadPdf = () => {
-    const fileName = this.getDateString() + '.pdf';    
+    let date = this.firstDate(this.state.selectedDays);
+    const fileName = date + '.pdf';    
     axios.post('/create-pdf', this.state)
     .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
     .then((res)=>{
@@ -118,7 +131,7 @@ class App extends Component{
                                   </label>
                                 </div>
 
-                                {/* { this.state.client ==='other' &&       */}
+                                { this.state.client ==='other' &&      
                                 <div className="clientInfo">
                                   <div className="form-group">
                                     <label htmlFor="clientName">Client Name</label> 
@@ -140,7 +153,7 @@ class App extends Component{
                                     <input type="text" id="clientAddress" className="form-control" value={this.state.clientAddress} name="clientAddress" onChange={this.handleChange}/>
                                   </div>
                                 </div>
-                                {/* } */}
+                                 } 
                                 
                                 <div className="form-group">
                                   <label htmlFor="po">Purchase order</label>
@@ -154,18 +167,20 @@ class App extends Component{
 
                                 <div className="form-group">
                                   <label htmlFor="jobDescription2">Dates</label>
-                                  <input type="text" id="jobDescription2" className="form-control" value={this.state.jobDescription2} name="jobDescription2" onChange={this.handleChange}/>
-                                </div>
-{/* 
+                                  {/* <input type="text" id="jobDescription2" className="form-control" value={this.state.jobDescription2} name="jobDescription2" onChange={this.handleChange}/> */}
+                                
                                 <DayPicker
                                   selectedDays={this.state.selectedDays}
                                   onDayClick={this.handleDayClick}
-                                /> */}
+                                /> 
+                                </div>
 
+
+{/* 
                                 <div className="form-group">
                                   <label htmlFor="quantity">Quantity</label>
                                   <input type="number" id="quantity" className="form-control" value={this.state.quantity} name="quantity" onChange={this.handleChange}/>
-                                </div>
+                                </div> */}
 
                                 <div className="form-group">
                                   <label htmlFor="dayRate">Day Rate</label>
