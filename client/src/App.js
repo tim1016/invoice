@@ -79,6 +79,9 @@ class App extends Component {
 
   firstDate = dates => {
     var firstDay;
+    if (dates.length === 0) {
+      return `no-date`;
+    }
     if (dates.length === 1) {
       firstDay = dates[0];
       firstDay = firstDay.toLocaleString('en-US');

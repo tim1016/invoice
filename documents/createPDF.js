@@ -1,24 +1,25 @@
 const formatNumber = require('numeral');
 
-const daysOfWork = (dates) => {
-  let dates1 = dates.map(date=>date.split("T")[0]);
-  dates1=dates1.sort();
-  let dates2 = dates1.map(date=>{
-    const temp = date.split("-");
+const daysOfWork = dates => {
+  let dates1 = dates.map(date => date.split('T')[0]);
+  dates1 = dates1.sort();
+  let dates2 = dates1.map(date => {
+    const temp = date.split('-');
     return `${temp[1]}/${temp[2]}/${temp[0]}`;
   });
-  return dates2; 
+  return dates2;
 };
 
-const workDaysString = (dates) =>{
-  if(dates.length > 1){
-    return `${dates[0]} to ${dates[dates.length-1]}`;
-  } else{
+const workDaysString = dates => {
+  if (dates.length > 1) {
+    return `${dates[0]} to ${dates[dates.length - 1]}`;
+  } else {
     return dates.join('<br>');
   }
-}
+};
 
-module.exports = ({ clientName,
+module.exports = ({
+  clientName,
   clientAddress,
   clientEmail,
   clientPhone,
@@ -28,12 +29,12 @@ module.exports = ({ clientName,
   dayRate,
   quantity,
   selectedDays
-  }) => {
+}) => {
   const today = new Date();
   const workDays = daysOfWork(selectedDays);
   const workString = workDaysString(workDays);
 
-return `
+  return `
 <!doctype html>
 <html>
     <head>
@@ -91,9 +92,15 @@ return `
        .invoice-box tr.top table td {
          padding-bottom: 20px; }
          .invoice-box tr.top table td.title {
-           font-size: 45px;
-           line-height: 45px;
+           font-size: 36px;
+           line-height: 36px;
            color: #333; }
+           .invoice-box tr.top table td.invoice-title {
+            font-size: 24px;
+            text-align:center !important;
+            vertical-align:middle !important;
+            color: #333; 
+          }   
        
        .invoice-box tr.information table td {
          padding-bottom: 40px; }
@@ -167,9 +174,16 @@ return `
                 <td colspan="2">
                     <table>
                     <tr>
-                        <td class="title"> Youa Awasthi <br> Photography</td>
-                        <td>
-                          Billing Date: ${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}  
+                        
+                        <td class="invoice-title" colspan="2">
+                          Invoice
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title"> Youa Awasthi</td>
+                        <td >
+                          Billing Date: ${today.getMonth() +
+                            1}/${today.getDate()}/${today.getFullYear()}   
                         </td>
                     </tr>
 
@@ -196,7 +210,9 @@ return `
                     <table>
                     <tr>
                         <td>
-                        Receipt number: ${workDays[0]} <br> Due date:  30 days from billing
+                        Receipt number: ${
+                          workDays[0]
+                        } <br> Due date:  30 days from billing
                         </td>
                         
                     </tr>
@@ -217,16 +233,22 @@ return `
 
 
             <tr class="item">
-                <td>Dates: ${workString} <br> <span id="bold"> ${jobDescription1} </span>  <br> ${ po === '' ? '': `Purchase Order - ${po}` } </td>
+                <td>Dates: ${workString} <br> <span id="bold"> ${jobDescription1} </span>  <br> ${
+    po === '' ? '' : `Purchase Order - ${po}`
+  } </td>
                 <td>${formatNumber(dayRate).format('0.00')}</td>
                 <td>${formatNumber(workDays.length).format('0')}</td>
-                <td>${formatNumber(workDays.length * dayRate).format('0.00')}</td>
+                <td>${formatNumber(workDays.length * dayRate).format(
+                  '0.00'
+                )}</td>
             </tr>
 
             
             <tr class="heading">
                 <td colspan="3">Total</td>
-                <td>${formatNumber(workDays.length * dayRate).format('0.00')}</td>
+                <td>${formatNumber(workDays.length * dayRate).format(
+                  '0.00'
+                )}</td>
             </tr>
         </table>
 
