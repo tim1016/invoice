@@ -28,8 +28,7 @@ class App extends Component {
     if (name === 'client' && value === 'quad') {
       this.setState(() => ({
         clientName: 'Quad Graphics',
-        clientAddress:
-          'Accounts Payable, 424 West 8th Street, Monroe, WI 53566',
+        clientAddress: "N61 W23044 Harry's Way, Sussex, Wisconsin 53089-3995",
         clientEmail: 'accountspayable@qg.com',
         clientPhone: '(608) 438-4078'
       }));
