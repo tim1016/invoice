@@ -89,11 +89,9 @@ module.exports = ({
        .invoice-box tr td:last-child {
          text-align: right; }
        
-       .invoice-box tr.top table td {
-         padding-bottom: 20px; }
+       
          .invoice-box tr.top table td.title {
-           font-size: 36px;
-           line-height: 36px;
+           font-size: 24px;
            color: #333; }
            .invoice-box tr.top table td.invoice-title {
             font-size: 24px;
@@ -103,7 +101,7 @@ module.exports = ({
           }   
        
        .invoice-box tr.information table td {
-         padding-bottom: 40px; }
+         padding-bottom: 20px; }
        
        .invoice-box tr table td.addressee {
         background-color: #eee;
