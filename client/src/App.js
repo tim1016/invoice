@@ -96,6 +96,7 @@ class App extends Component {
       }
     }
     firstDay = firstDay.toLocaleString('en-US');
+    console.log(firstDay);
     firstDay = firstDay.split(',')[0];
     firstDay = firstDay.split('/');
     return `${firstDay[2]}-${firstDay[0]}-${firstDay[1]}`;
@@ -226,7 +227,7 @@ class App extends Component {
                         </div>
 
                         <div className="form-group">
-                          <label htmlFor="jobDescription2">Dates</label>
+                          {/* <label htmlFor="jobDescription2">Dates</label> */}
                           {/* <input type="text" id="jobDescription2" className="form-control" value={this.state.jobDescription2} name="jobDescription2" onChange={this.handleChange}/> */}
 
                           <DayPicker
