@@ -208,7 +208,7 @@ module.exports = ({
                     <table>
                     <tr>
                         <td>
-                        Receipt number: ${
+                        Invoice number: ${
                           workDays[0]
                         } <br> Due date:  30 days from billing
                         </td>
