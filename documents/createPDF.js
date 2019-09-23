@@ -1,5 +1,10 @@
 const formatNumber = require('numeral');
 
+const makeRecieptNumber = str => {
+  const temp = str.split('/');
+  return temp[2] + temp[0] + temp[1];
+};
+
 const daysOfWork = dates => {
   let dates1 = dates.map(date => date.split('T')[0]);
   dates1 = dates1.sort();
@@ -208,9 +213,9 @@ module.exports = ({
                     <table>
                     <tr>
                         <td>
-                        Invoice number: ${
+                        Invoice number: ${makeRecieptNumber(
                           workDays[0]
-                        } <br> Due date:  30 days from billing
+                        )} <br> Due date:  30 days from billing
                         </td>
                         
                     </tr>
