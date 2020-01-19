@@ -1,6 +1,6 @@
-# Project Title
+# Invoice for Youa Photography LLC.
 
-Generate PDF invoice for clients for Youa Photography LLC. Pre-fills the form for existing clients. Currently uses PhantomJS, which is not supported anymore. Need to use Puppeteer, or React PDF, in future.
+Generate PDF invoice for clients for Youa Photography LLC. Pre-fills the form for existing clients. Currently uses PhantomJS, which is not supported anymore, and causes security vulnerability. Need to use Puppeteer, or React PDF, in future.
 
 ## Getting Started
 
