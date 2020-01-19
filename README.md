@@ -8,8 +8,8 @@ cd client && npm install && npm run build && cd ../
 
 ## Built With
 
-* [REACT](http://www.dropwizard.io/1.0.2/docs/)
-* [PhantomJS](https://maven.apache.org/) 
+* [REACT](https://reactjs.org/)
+* [PhantomJS](https://phantomjs.org/) 
 
 
 ## Acknowledgments
